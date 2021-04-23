@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html hreflang="en" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>UnBlock+</title>
+		<style>
+			input[type="submit"] {
+				cursor: pointer;
+				min-width: 100px;
+				vertical-align: middle;
+				color: #000;
+				border: solid 2px #888;
+				border-radius: 5px;
+				background: #ccc;
+				height: 52px;
+			}
+
+			input[type="url"] {
+				height: 40px;
+			}
+
+			body {
+				height: 100%;
+				font-family: "Segoe UI Webfont", Ebrima, "Nirmala UI", Gadugi, "Segoe Xbox Symbol", "Segoe UI Symbol",
+					"Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha, Leelawadee,
+					"Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa",
+					"Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le",
+					"Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+				font-size: 0.9375rem;
+				line-height: 1.25rem;
+				padding-bottom: 0.01419rem;
+				padding-top: 0.01419rem;
+				font-weight: 400;
+				color: #000;
+				background-color: #fff;
+				margin: 0;
+			}
+
+			input {
+				font: inherit;
+				margin: 0;
+				max-width: 100%;
+				line-height: inherit;
+				font-family: inherit;
+				font-size: inherit;
+				padding: 4px;
+				border-style: solid;
+				border-width: 2px;
+				border-color: #999;
+				background-color: #fff;
+				color: initial;
+			}
+
+			h1,
+			p {
+				margin-bottom: 1.25rem;
+				margin-top: 1.25rem;
+			}
+
+			html {
+				font-size: 100;
+				font-family: sans-serif;
+			}
+
+			p {
+				font-size: 0.9375rem;
+				line-height: 1.25rem;
+				padding-bottom: 0.01419rem;
+				padding-top: 0.01419rem;
+				font-weight: 400;
+			}
+
+			#controlsForNewPages {
+				position: -webkit-sticky;
+				position: sticky;
+				top: 0;
+				text-align: center;
+				padding: 10px;
+				color: #f8f8f8;
+				background: #047769;
+				z-index: 9999999999;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="controlsForNewPages">
+			<h1>UnBlock+</h1>
+			<form>
+				<label>URL <input type="url" name="url" /> </label>
+				<input type="submit" value="Go!" />
+			</form>
+			<script>
+				if (new URLSearchParams(location.search).get("url")) {
+					document.body.innerHTML = '<meta content="0;url='.concat(
+						new URLSearchParams(location.search).get("url"),
+						'" http-equiv="refresh">',
+					);
+				}
+			</script>
+		</div>
+	</body>
+</html>
