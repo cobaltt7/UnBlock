@@ -22,11 +22,14 @@
 
 			body {
 				height: 100%;
-				font-family: "Segoe UI Webfont", Ebrima, "Nirmala UI", Gadugi, "Segoe Xbox Symbol", "Segoe UI Symbol",
-					"Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha, Leelawadee,
-					"Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa",
-					"Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le",
-					"Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+				font-family: "Segoe UI Webfont", Ebrima, "Nirmala UI", Gadugi,
+					"Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI",
+					"Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha,
+					Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI",
+					"Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya",
+					"Microsoft New Tai Lue", "Microsoft PhagsPa",
+					"Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti",
+					"MV Boli", "Myanmar Text", "Cambria Math";
 				font-size: 0.9375rem;
 				line-height: 1.25rem;
 				padding-bottom: 0.01419rem;
@@ -109,24 +112,34 @@
 		<script>
 			"use strict";
 			function fixLinks(doc, attr) {
-				Array.from(doc.querySelectorAll(`[${attr}]`)).forEach((link) => {
-					const assetUrl = new URL(link.getAttribute(attr), url).href;
-					if (link.tagName === "A" && link.target !== "_blank") {
-						link.target = "_parent";
-					}
-					return link.setAttribute(
-						attr,
-						["A", "IFRAME"].includes(link.tagName)
-							? location.origin + location.pathname + "?url=" + encodeURIComponent(assetUrl)
-							: assetUrl,
-					);
-				});
+				Array.from(doc.querySelectorAll(`[${attr}]`)).forEach(
+					(link) => {
+						const assetUrl = new URL(link.getAttribute(attr), url)
+							.href;
+						if (link.tagName === "A" && link.target !== "_blank") {
+							link.target = "_parent";
+						}
+						return link.setAttribute(
+							attr,
+							["A", "IFRAME"].includes(link.tagName)
+								? location.origin +
+										location.pathname +
+										"?url=" +
+										encodeURIComponent(assetUrl)
+								: assetUrl,
+						);
+					},
+				);
 			}
-			const url = new URL(location.href).searchParams.get("url").replace(/http:/g, "https:");
+			const url = new URL(location.href).searchParams
+				.get("url")
+				.replace(/http:/g, "https:");
 			fetch(url)
 				.then((response) => {
 					if (!response.ok) {
-						document.getElementById("result").srcdoc = JSON.stringify(response);
+						document.getElementById(
+							"result",
+						).srcdoc = JSON.stringify(response);
 						throw response;
 					}
 					return response.text();
@@ -134,18 +147,24 @@
 				.then((html) => {
 					const newDoc = document.createElement("html");
 					newDoc.innerHTML = html.replace(/http:/g, "https:");
-					var link = document.querySelector("link[rel*='icon']") || document.createElement("link");
+					var link =
+						document.querySelector("link[rel*='icon']") ||
+						document.createElement("link");
 					link.type = "image/x-icon";
 					link.rel = "shortcut icon";
 					link.href = new URL(url).origin + "/favicon.ico";
 					document.getElementsByTagName("head")[0].appendChild(link);
 					fixLinks(newDoc, "href");
 					fixLinks(newDoc, "src");
-					document.title = newDoc.querySelector("title").textContent + " | UnBlock";
+					document.title =
+						newDoc.querySelector("title").textContent +
+						" | UnBlock";
 					document.getElementById("result").srcdoc = newDoc.innerHTML;
 				})
 				.catch((e) => {
-					document.getElementById("result").srcdoc = JSON.stringify(e);
+					document.getElementById("result").srcdoc = JSON.stringify(
+						e,
+					);
 					throw e;
 				});
 		</script>
