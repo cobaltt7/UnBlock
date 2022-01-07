@@ -137,9 +137,8 @@
 			fetch(url)
 				.then((response) => {
 					if (!response.ok) {
-						document.getElementById(
-							"result",
-						).srcdoc = JSON.stringify(response);
+						document.getElementById("result").srcdoc =
+							JSON.stringify(response);
 						throw response;
 					}
 					return response.text();
@@ -162,9 +161,8 @@
 					document.getElementById("result").srcdoc = newDoc.innerHTML;
 				})
 				.catch((e) => {
-					document.getElementById("result").srcdoc = JSON.stringify(
-						e,
-					);
+					document.getElementById("result").srcdoc =
+						JSON.stringify(e);
 					throw e;
 				});
 		</script>
